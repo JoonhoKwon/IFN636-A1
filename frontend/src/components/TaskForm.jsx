@@ -4,7 +4,7 @@ import axiosInstance from '../axiosConfig';
 
 const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask }) => {
   const { user } = useAuth();
-  const [formData, setFormData] = useState({ title: '', description: '', deadline: '' });
+  const [formData, setFormData] = useState({ title: '', description: '', deadline: '', cvv: '' });
 
   useEffect(() => {
     if (editingTask) {
@@ -12,9 +12,10 @@ const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask }) => {
         title: editingTask.title,
         description: editingTask.description,
         deadline: editingTask.deadline,
+        cvv: editingTask.cvv
       });
     } else {
-      setFormData({ title: '', description: '', deadline: '' });
+      setFormData({ title: '', description: '', deadline: '', cvv: '' });
     }
   }, [editingTask]);
 
@@ -33,7 +34,7 @@ const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask }) => {
         setTasks([...tasks, response.data]);
       }
       setEditingTask(null);
-      setFormData({ title: '', description: '', deadline: '' });
+      setFormData({ title: '', description: '', deadline: '', cvv: '' });
     } catch (error) {
       alert('Failed to save task.');
     }
@@ -41,17 +42,17 @@ const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask }) => {
 
   return (
     <form onSubmit={handleSubmit} className="bg-white p-6 shadow-md rounded mb-6">
-      <h1 className="text-2xl font-bold mb-4">{editingTask ? 'Edit Task' : 'Add Task'}</h1>
+      <h1 className="text-2xl font-bold mb-4">{editingTask ? 'Edit Task' : 'Upgrade Subscription Plan'}</h1>
       <input
         type="text"
-        placeholder="Title"
+        placeholder="Plan Tier"
         value={formData.title}
         onChange={(e) => setFormData({ ...formData, title: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
       />
       <input
         type="text"
-        placeholder="Description"
+        placeholder="Card Number"
         value={formData.description}
         onChange={(e) => setFormData({ ...formData, description: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
@@ -62,8 +63,15 @@ const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask }) => {
         onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
       />
+      <input
+        type="password"
+        placeholder="CVV"
+        value={formData.cvv}
+        onChange={(e) => setFormData({ ...formData, cvv: e.target.value })}
+        className="w-full mb-4 p-2 border rounded"
+      />
       <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">
-        {editingTask ? 'Update Task' : 'Add Task'}
+        {editingTask ? 'Update Task' : 'Pay & Upgrade the Plan'}
       </button>
     </form>
   );
