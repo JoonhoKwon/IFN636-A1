@@ -56,5 +56,5 @@ npm run install-all
 - Multi-currency system should be supported.
 
 ## Public deployment URL
-- **AWS EC2 Deployment URL:** `http://54.153.191.190/`
+- **AWS EC2 Deployment URL:** `http://3.106.116.111/(http://3.106.116.111/)`
 - **Deployment Stack:** AWS EC2(Ubuntu) managed PM2 process manager and reverse-proxied through Nginx on HTTP Port 80.
